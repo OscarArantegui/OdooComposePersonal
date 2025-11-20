@@ -1,0 +1,55 @@
+<odoo>
+<!--Add course action-->
+    <record model="ir.actions.act_window" id="course_list_action">
+        <field name="name">Cursos</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">list,form</field>
+    </record>
+<!--Add course menu item-->
+    <menuitem id="main_openacademy_menu" name="OpenAcademy"/>
+    <menuitem id="openacademy_courses_menu"
+        name="Cursos"
+        parent="main_openacademy_menu"
+        action="course_list_action"/>
+<!--Add course list view-->
+    <record model="ir.ui.view" id="course_list_view">
+        <field name="name">openacademy.course.list</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <list string="Lista de Cursos">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="duration"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+<!--Add course form view-->
+    <record model="ir.ui.view" id="course_form_view">
+        <field name="name">openacademy.course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Formulario de Curso">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="duration"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--Add course search view-->
+    <record model="ir.ui.view" id="course_search_view">
+        <field name="name">openacademy.course.search</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Título"/>
+                <field name="description" string="Descripción"/>
+            </search>
+        </field>
+    </record>
+</odoo>
