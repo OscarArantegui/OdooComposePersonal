@@ -52,4 +52,49 @@
             </search>
         </field>
     </record>
+<!--Add course session list view-->
+    <record model="ir.ui.view" id="session_list_view">
+        <field name="name">openacademy.session.list</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <list string="Lista de Sesiones">
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="duration"/>
+                <field name="seats"/>
+                <field name="instructor_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+<!--Add course session form view -->
+    <record model="ir.ui.view" id="session_form_view">
+        <field name="name">openacademy.session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <form string="Formulario de Sesión">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="course_id"/>
+                            <field name="instructor_id"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!-- Add course session action view-->
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">Sesiones</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">list,form</field>
+    </record>
 </odoo>
