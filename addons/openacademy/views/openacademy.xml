@@ -97,4 +97,25 @@
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">list,form</field>
     </record>
+    <!--Add session menu item-->
+    <menuitem id="session_menu" 
+        name="Sesiones"
+        parent="main_openacademy_menu"
+        action="session_list_action"/>
+<!--Add partner instructor form view-->
+    <record model="ir.ui.view" id="partner_instructor_form_view">
+        <field name="name">partner.instructor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="OpenAcademy">
+                    <group>
+                        <field name="instructor"/>
+                        <field name="session_ids"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
 </odoo>
