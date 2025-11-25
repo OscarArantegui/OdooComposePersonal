@@ -15,14 +15,11 @@ class Session(models.Model):
     active = fields.Boolean(default=True)
 
     # --- RELACIONES ---
-    # 1. Instructor: Relación con Contactos (res.partner)
-    instructor_id = fields.Many2one('res.partner', string="Instructor")
 
-    # 2. Curso:
-    # ondelete='cascade': Si borras el curso, se borran las sesiones automáticamente
+    # Cursos: ondelete='cascade': Si borras el curso, se borran las sesiones automáticamente
     course_id = fields.Many2one('openacademy.course', ondelete='cascade', string="Course", required=True)
 
-    # 3. Asistentes: Relación Many2many con Contactos (res.partner)
+    # Asistentes: Relación Many2many con Contactos (res.partner)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
 
     # Buscamos instructores (instructor=True) O que tengan una categoría que contenga "Teacher"
@@ -40,3 +37,9 @@ class Session(models.Model):
                 r.taken_seats = 0.0
             else:
                 r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
+    # VALIDACIÓN: El instructor no puede ser asistente
+    @api.constrains('instructor_id', 'attendee_ids')
+    def _check_instructor_not_in_attendees(self):
+        for r in self:
+            if r.instructor_id and r.instructor_id in r.attendee_ids:
+                raise ValidationError("Un instructor no puede ser asistente de su propia sesión")
