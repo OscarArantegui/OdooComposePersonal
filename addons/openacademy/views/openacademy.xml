@@ -57,14 +57,14 @@
         <field name="name">openacademy.session.list</field>
         <field name="model">openacademy.session</field>
         <field name="arch" type="xml">
-            <list string="Lista de Sesiones">
-                <field name="name"/>
+            <list string="Lista de Sesiones"> <field name="name"/>
                 <field name="course_id"/>
                 <field name="duration"/>
                 <field name="seats"/>
-                <field name="instructor_id"/>
+                <field name="taken_seats" widget="progressbar"/> <field name="instructor_id"/>
                 <field name="active"/>
             </list>
+
         </field>
     </record>
 <!--Add course session form view -->
@@ -84,8 +84,9 @@
                             <field name="start_date"/>
                             <field name="duration"/>
                             <field name="seats"/>
-                            <field name="active"/>
+                            <field name="taken_seats" widget="progressbar"/> <field name="active"/>
                         </group>
+
                     </group>
                 </sheet>
             </form>
