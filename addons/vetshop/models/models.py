@@ -77,7 +77,7 @@ class VetShopPet(models.Model):
     weight = fields.Float(string='Peso (kg)')
     
     # TODO: Modifica este campo para añadir un default que genere un número aleatorio
-    chip_code = fields.Char(string='Código Chip') 
+    chip_code = fields.Char(string='Código Chip'default=lambda self: str(random.randint(100000, 999999))) 
 
     # TODO: Define la relación Many2one con 'vetshop.owner'
     owner_id = fields.Many2one('vetshop.owner', string='Dueño')
