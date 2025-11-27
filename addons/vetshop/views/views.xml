@@ -7,13 +7,11 @@
       <field name="arch" type="xml">
         <list>
           <field name="name"/>
-          <field name="species"/>
-          <field name="breed"/>
+          <field name="species_id"/>
           <field name="age"/>
           <field name="weight"/>
           <field name="chip_code"/>
           <field name="owner_id"/>
-          <field name="active"/>
         </list>
       </field>
     </record>
@@ -36,8 +34,6 @@
                 <field name="active"/>
               </group>
               <group string="Detalles">
-                <field name="medical_history"/>
-                <field name="appointments"/>
               </group>
             </group>
           </sheet>
@@ -86,13 +82,12 @@
                 <field name="state"/>
               </group>
               <group>
-                <label string="Productos" colspan="4"/>
-                <field name="product_ids"/>
+                <field name="product_ids" widget="many2many_tags"/>
               </group>
             </group>
             <notebook>
                 <page string="Productos">
-                    <field name="product_ids" widget="many2many_tags"/>
+                    <field name="product_ids"/>
                 </page>
             </notebook>
           </sheet>
@@ -108,12 +103,9 @@
 
 
     <menuitem name="VetShop" id="menu_root"/>
-
     <menuitem name="Clínica" id="menu_clinic" parent="menu_root" sequence="10"/>
     <menuitem name="Tienda" id="menu_shop" parent="menu_root" sequence="20"/>
-
     <menuitem name="Mascotas" id="menu_pet" parent="menu_clinic" action="action_pet"/>
-
     <menuitem name="Pedidos de Venta" id="menu_sale_order" parent="menu_shop" action="action_sale_order"/>
 
   </data>
