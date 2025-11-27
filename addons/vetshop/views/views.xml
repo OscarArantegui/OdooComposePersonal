@@ -25,15 +25,13 @@
             <group>
               <group string="Datos Principales">
                 <field name="name"/>
-                <field name="species"/>
-                <field name="breed"/>
-                <field name="age"/>
-                <field name="weight"/>
+                <field name="species_id"/> 
                 <field name="chip_code"/>
-                <field name="owner_id"/>
-                <field name="active"/>
               </group>
               <group string="Detalles">
+                <field name="owner_id"/>
+                <field name="age"/>
+                <field name="weight"/>
               </group>
             </group>
           </sheet>
