@@ -1,0 +1,156 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="gymfit.list">
+      <field name="name">gymfit list</field>
+      <field name="model">gymfit.gymfit</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="gymfit.action_window">
+      <field name="name">gymfit window</field>
+      <field name="res_model">gymfit.gymfit</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="gymfit.action_server">
+      <field name="name">gymfit server</field>
+      <field name="model_id" ref="model_gymfit_gymfit"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="gymfit" id="gymfit.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="gymfit.menu_1" parent="gymfit.menu_root"/>
+    <menuitem name="Menu 2" id="gymfit.menu_2" parent="gymfit.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="gymfit.menu_1_list" parent="gymfit.menu_1"
+              action="gymfit.action_window"/>
+    <menuitem name="Server to list" id="gymfit" parent="gymfit.menu_2"
+              action="gymfit.action_server"/>
+-->
+  </data>
+</odoo>
+
+
+
+<odoo>
+  <data>
+
+    <!-- ================================================= -->
+    <!-- 1. VISTA LIST (Tabla)                             -->
+    <!-- ================================================= -->
+    <record model="ir.ui.view" id="view_session_list">
+      <field name="name">gymfit.session.list</field>
+      <field name="model">gymfit.session</field> <!-- NOMBRE DEL MODELO -->
+      <field name="arch" type="xml">
+        <list>
+          <!-- CAMPOS SIMPLES -->
+          <field name="name"/>
+          <field name="start_time"/>
+          
+          <!-- CAMPO RELACIONAL (Muestra el nombre del instructor) -->
+          <field name="instructor_id"/>
+          
+          <!-- CAMPO NUMÉRICO -->
+          <field name="capacity"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- ================================================= -->
+    <!-- 2. VISTA FORM (Formulario)                        -->
+    <!-- ================================================= -->
+    <record model="ir.ui.view" id="view_session_form">
+      <field name="name">gymfit.session.form</field>
+      <field name="model">gymfit.session</field> <!-- NOMBRE DEL MODELO -->
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <!-- TÍTULO GRANDE (H1) -->
+            <div class="oe_title">
+                <h1>
+                    <field name="name" placeholder="Ej: Clase de Yoga"/>
+                </h1>
+            </div>
+
+            <group>
+              <!-- GRUPO IZQUIERDO -->
+              <group string="Detalles">
+                <field name="instructor_id"/>
+                <field name="capacity"/>
+              </group>
+              
+              <!-- GRUPO DERECHO -->
+              <group string="Horario">
+                <field name="start_time"/>
+                <field name="end_time"/>
+              </group>
+            </group>
+
+            <!-- PESTAÑAS (NOTEBOOK) PARA LISTAS LARGAS -->
+            <notebook>
+                <page string="Socios Apuntados">
+                    <!-- Many2many siempre dentro de notebook/page -->
+                    <field name="member_ids"/>
+                </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- ================================================= -->
+    <!-- 3. ACCIÓN (El nexo)                               -->
+    <!-- ================================================= -->
+    <record model="ir.actions.act_window" id="action_session">
+      <field name="name">Clases Dirigidas</field> <!-- Título de la ventana -->
+      <field name="res_model">gymfit.session</field> <!-- NOMBRE DEL MODELO -->
+      <field name="view_mode">list,form</field>
+    </record>
+
+
+    <!-- ================================================= -->
+    <!-- 4. MENÚS                                          -->
+    <!-- ================================================= -->
+    
+    <!-- NIVEL 1: App -->
+    <menuitem name="GymFit" id="menu_gym_root"/>
+
+    <!-- NIVEL 2: Categoría -->
+    <menuitem name="Gestión" id="menu_gestion" parent="menu_gym_root"/>
+
+    <!-- NIVEL 3: Botón final (Apunta a la acción) -->
+    <menuitem name="Clases" id="menu_session" 
+              parent="menu_gestion" 
+              action="action_session"/> <!-- ID DE LA ACCIÓN DE ARRIBA -->
+
+  </data>
+</odoo>
