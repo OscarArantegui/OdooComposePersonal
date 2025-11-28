@@ -96,7 +96,7 @@ class HotelBooking(models.Model):
     room_id = fields.Many2one('hotel.room',string='Habitación', required=True)
 
     # TODO: Relación Many2many con Service
-    service_ids = fields.Many2many('hotel.services', string='Servicios', required=True)
+    service_ids = fields.Many2many('hotel.service', string='Servicios', required=True)
 
     # TODO: Campo calculado total_price
     total_price = fields.Float(string='Precio Total', compute='_compute_total_price', store=True)
@@ -111,7 +111,7 @@ class HotelBooking(models.Model):
 
     # TODO: Python Constrains (Check out > Check in)
     # def _check_dates(self): ...
-    @api.constraints('check_in', 'check_out')
+    @api.constrains('check_in', 'check_out')
     def _check_dates(self):
         for record in self:
             if record.check_out < record.check_in:
