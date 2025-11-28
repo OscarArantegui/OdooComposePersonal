@@ -1,7 +1,6 @@
+<!--
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
     <record model="ir.ui.view" id="gymfit.list">
       <field name="name">gymfit list</field>
       <field name="model">gymfit.gymfit</field>
@@ -55,10 +54,10 @@
               action="gymfit.action_window"/>
     <menuitem name="Server to list" id="gymfit" parent="gymfit.menu_2"
               action="gymfit.action_server"/>
--->
+
   </data>
 </odoo>
-
+-->
 
 
 <odoo>
