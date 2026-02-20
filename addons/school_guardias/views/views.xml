@@ -1,0 +1,184 @@
+<odoo>
+    <!--List views-->
+    <record id="view_classroom_list" model="ir.ui.view">
+        <field name="name">school.classroom.list</field>
+        <field name="model">school.classroom</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="location"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_group_list" model="ir.ui.view">
+        <field name="name">school.group.list</field>
+        <field name="model">school.group</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="student_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_teacher_list" model="ir.ui.view">
+        <field name="name">school.teacher.list</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="substitution_count" widget="badge" decoration-info="1"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_substitution_list" model="ir.ui.view">
+        <field name="name">school.substitution.list</field>
+        <field name="model">school.substitution</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'done'" decoration-danger="state == 'draft'">
+                <field name="date"/>
+                <field name="period_id"/>
+                <field name="replaced_teacher_id"/>
+                <field name="classroom_id"/>
+                <field name="group_id"/>
+                <field name="substitute_teacher_id"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <!--Form views-->
+    <record id="view_schedule_form" model="ir.ui.view">
+        <field name="name">school.schedule.form</field>
+        <field name="model">school.schedule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="teacher_id"/>
+                        <h1>
+                            <field name="teacher_id"/>
+                        </h1>
+                    </div>
+                    <div class="alert alert-info">Marque "Is Free" solo cuando el profesor
+                    pueda hacer guardias</div>
+                    <field name="period_ids">
+                        <list editable="bottom" default_order="day_select, period_number">
+                            <field name="day_select"/>
+                            <field name="period_number"/>
+                            <field name="is_free" widget="boolean_toggle"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_teacher_form" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="dni"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Estadísticas">
+                            <group><field name="substitution_count"/></group>
+                            <field name="substitution_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_substitution_form" model="ir.ui.view">
+        <field name="name">school.substitution.form</field>
+        <field name="model">school.substitution</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_assign_substitute" string="Asignar sustituto"
+                            type="object" class="oe_highlight" invisible="state == 'done'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Detalles">
+                            <field name="date"/>
+                            <field name="replaced_teacher_id"/>
+
+                            <field name="period_id" 
+                            domain="[('schedule_id.teacher_id', '=', replaced_teacher_id), ('is_free', '=', False)]"
+                            options="{'no_create': True}"/>
+                    </group>
+                        <group string="Ubicacion">
+                            <field name="classroom_id"/>
+                            <field name="group_id"/>
+                        </group>
+                    </group>
+                    <group string="Resultado">
+                        <field name="substitute_teacher_id"/>
+                        <field name="tasks"/>
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <!--Action views-->
+    <record id="action_classroom" model="ir.actions.act_window">
+        <field name="name">Aulas</field>
+        <field name="res_model">school.classroom</field>
+        <field name="view_mode">list</field>
+    </record>
+    <record id="action_group" model="ir.actions.act_window">
+        <field name="name">Grupos</field>
+        <field name="res_model">school.group</field>
+        <field name="view_mode">list</field>
+    </record>
+    <record id="action_schedule" model="ir.actions.act_window">
+        <field name="name">Horarios</field>
+        <field name="res_model">school.schedule</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_teacher" model="ir.actions.act_window">
+        <field name="name">Profesores</field>
+        <field name="res_model">school.teacher</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_substitution" model="ir.actions.act_window">
+        <field name="name">Guardias</field>
+        <field name="res_model">school.substitution</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--Menu Items-->
+    <menuitem id="menu_school_root" name="Instituto"/>
+    <menuitem id="menu_school_ops" name="Operaciones" parent="menu_school_root"/>
+    <menuitem id="menu_schedule" name="Horarios" parent="menu_school_ops" action="action_schedule"/>
+    <menuitem id="menu_teacher" parent="menu_school_ops" action="action_teacher"/>
+    <menuitem id="menu_substitution" parent="menu_school_ops" action="action_substitution"/>
+
+    <menuitem id="menu_school_gest" name="Gestion" parent="menu_school_root"/>
+    <menuitem id="menu_classroom" name="Aulas" parent="menu_school_gest" action="action_classroom"/>
+    <menuitem id="menu_group" name="Grupos" parent="menu_school_gest" action="action_group"/>
+    
+</odoo>

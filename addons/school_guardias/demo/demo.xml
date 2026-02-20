@@ -1,0 +1,109 @@
+<odoo>
+    <data noupdate="0">
+        <record id="aula_info1" model="school.classroom">
+            <field name="name">Informática 1</field>
+            <field name="location">Planta 1</field>
+        </record>
+        <record id="aula_taller" model="school.classroom">
+            <field name="name">Taller Hardware</field>
+            <field name="location">Sótano</field>
+        </record>
+        <record id="aula_teoria" model="school.classroom">
+            <field name="name">Aula 204</field>
+            <field name="location">Planta 2</field>
+        </record>
+
+        <record id="grupo_2dam" model="school.group">
+            <field name="name">2º DAM</field>
+            <field name="student_count">25</field>
+        </record>
+        <record id="grupo_1dam" model="school.group">
+            <field name="name">1º DAM</field>
+            <field name="student_count">30</field>
+        </record>
+        <record id="grupo_smr" model="school.group">
+            <field name="name">1º SMR</field>
+            <field name="student_count">18</field>
+        </record>
+
+        <record id="prof_agustin" model="school.teacher">
+            <field name="name">Agustín Sidauy</field>
+            <field name="dni">11111111A</field>
+            <field name="email">sidauy23@iespabloserrano.com</field>
+        </record>
+
+        <record id="prof_lucia" model="school.teacher">
+            <field name="name">Lucía Aznar</field>
+            <field name="dni">22222222B</field>
+            <field name="email">aa22.laznar44@iespabloserrano.com</field>
+        </record>
+
+        <record id="prof_oscar" model="school.teacher">
+            <field name="name">Óscar Arantegui</field>
+            <field name="dni">33333333C</field>
+            <field name="email">aranteguijimenez24@iespabloserrano.com</field>
+        </record>
+
+        <record id="sch_agustin" model="school.schedule">
+            <field name="teacher_id" ref="prof_agustin"/>
+        </record>
+
+        <record id="sch_lucia" model="school.schedule">
+            <field name="teacher_id" ref="prof_lucia"/>
+        </record>
+
+        <record id="sch_oscar" model="school.schedule">
+            <field name="teacher_id" ref="prof_oscar"/>
+        </record>
+
+        <record id="p_ag_0_1" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">1</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_0_2" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">2</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_0_3" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">3</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_0_4" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">4</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_0_5" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">5</field><field name="is_free" eval="True"/></record>
+        <record id="p_ag_0_6" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">6</field><field name="is_free" eval="True"/></record>
+        <record id="p_ag_0_7" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">0</field><field name="period_number">7</field><field name="is_free" eval="True"/></record>
+
+        <record id="p_lu_0_1" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">1</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_0_2" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">2</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_0_3" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">3</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_0_4" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">4</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_0_5" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">5</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_0_6" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">6</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_0_7" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">0</field><field name="period_number">7</field><field name="is_free" eval="False"/></record>
+
+        <record id="p_os_0_1" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">1</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_0_2" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">2</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_0_3" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">3</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_0_4" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">4</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_0_5" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">5</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_0_6" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">6</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_0_7" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">0</field><field name="period_number">7</field><field name="is_free" eval="False"/></record>
+
+
+        <record id="p_ag_1_1" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">1</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_1_2" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">2</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_1_3" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">3</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_1_4" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">4</field><field name="is_free" eval="False"/></record>
+        <record id="p_ag_1_5" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">5</field><field name="is_free" eval="True"/></record>
+        <record id="p_ag_1_6" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">6</field><field name="is_free" eval="True"/></record>
+        <record id="p_ag_1_7" model="school.period"><field name="schedule_id" ref="sch_agustin"/><field name="day_select">1</field><field name="period_number">7</field><field name="is_free" eval="True"/></record>
+
+        <record id="p_lu_1_1" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">1</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_1_2" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">2</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_1_3" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">3</field><field name="is_free" eval="True"/></record>
+        <record id="p_lu_1_4" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">4</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_1_5" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">5</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_1_6" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">6</field><field name="is_free" eval="False"/></record>
+        <record id="p_lu_1_7" model="school.period"><field name="schedule_id" ref="sch_lucia"/><field name="day_select">1</field><field name="period_number">7</field><field name="is_free" eval="False"/></record>
+
+        <record id="p_os_1_1" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">1</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_1_2" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">2</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_1_3" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">3</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_1_4" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">4</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_1_5" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">5</field><field name="is_free" eval="True"/></record>
+        <record id="p_os_1_6" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">6</field><field name="is_free" eval="False"/></record>
+        <record id="p_os_1_7" model="school.period"><field name="schedule_id" ref="sch_oscar"/><field name="day_select">1</field><field name="period_number">7</field><field name="is_free" eval="False"/></record>
+        
+    </data>
+</odoo>

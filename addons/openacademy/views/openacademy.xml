@@ -1,0 +1,188 @@
+<odoo>
+<!--Add course action-->
+    <record model="ir.actions.act_window" id="course_list_action">
+        <field name="name">Cursos</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">list,form</field>
+    </record>
+<!--Add course menu item-->
+    <menuitem id="main_openacademy_menu" name="OpenAcademy"/>
+    <menuitem id="openacademy_courses_menu"
+        name="Cursos"
+        parent="main_openacademy_menu"
+        action="course_list_action"/>
+<!--Add course list view-->
+    <record model="ir.ui.view" id="course_list_view">
+        <field name="name">openacademy.course.list</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <list string="Lista de Cursos">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="duration"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+<!--Add course form view-->
+    <record model="ir.ui.view" id="course_form_view">
+        <field name="name">openacademy.course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Formulario de Curso">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="duration"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--Add course search view-->
+    <record model="ir.ui.view" id="course_search_view">
+        <field name="name">openacademy.course.search</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                
+                <filter name="my_courses" string="Mis Cursos" domain="[('responsible_id', '=', uid)]"/>
+            </search>
+        </field>
+    </record>
+<!--Add course session list view-->
+    <record model="ir.ui.view" id="session_list_view">
+        <field name="name">openacademy.session.list</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <list string="Lista de Sesiones" decoration-info="duration &lt; 5" decoration-danger="duration &gt; 15"> 
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="duration"/>
+                <field name="seats"/>
+                <field name="taken_seats" widget="progressbar"/> 
+                <field name="instructor_id"/>
+                <field name="active"/>
+            </list>
+
+        </field>
+    </record>
+<!--Add course session form view -->
+    <record model="ir.ui.view" id="session_form_view">
+        <field name="name">openacademy.session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <form string="Formulario de Sesión">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="course_id"/>
+                            <field name="instructor_id"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                            <field name="taken_seats" widget="progressbar"/> <field name="active"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+<!-- Add course session action view-->
+    <record model="ir.ui.view" id="session_calendar_view">
+        <field name="name">session.calendar</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="openacademy_session_graph_view">
+        <field name="name">openacademy.session.graph</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <graph string="Participations by Courses">
+                <field name="course_id"/>
+                <field name="attendees_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <!--Kanban-->
+    <record model="ir.ui.view" id="view_openacad_session_kanban">
+        <field name="name">openacad.session.kanban</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="course_id">
+                <field name="color"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}} oe_kanban_global_click_edit oe_kanban_card">
+                            
+                            <div class="oe_dropdown_kanban">
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage"/>
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            
+                            <div class="oe_kanban_content">
+                                <strong><field name="name"/></strong>
+                                <br/>
+                                Start date: <field name="start_date"/>
+                                <br/>
+                                Duration: <field name="duration"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">Sesiones</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">list,form,calendar,graph,kanban</field>
+    </record>
+
+    <menuitem id="session_menu" 
+        name="Sesiones"
+        parent="main_openacademy_menu"
+        action="session_list_action"/>
+<!--Add partner instructor form view-->
+    <record model="ir.ui.view" id="partner_instructor_form_view">
+        <field name="name">partner.instructor</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="OpenAcademy">
+                    <group>
+                        <field name="instructor"/>
+                        <field name="session_ids"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

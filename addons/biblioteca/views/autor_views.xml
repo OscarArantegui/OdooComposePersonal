@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_autor_list" model="ir.ui.view">
+        <field name="name">biblioteca.autor.list</field>
+        <field name="model">biblioteca.autor</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="nacionalidad"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_autor_form" model="ir.ui.view">
+        <field name="name">biblioteca.autor.form</field>
+        <field name="model">biblioteca.autor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nacionalidad"/>
+                        <field name="fecha_nacimiento"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biblioteca_autor" model="ir.actions.act_window">
+        <field name="name">Autores</field>
+        <field name="res_model">biblioteca.autor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

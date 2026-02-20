@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record model="openacademy.course" id="course0">
+            <field name="name">Curso de Odoo 101</field>
+            <field name="description">Un curso básico sobre el desarrollo de módulos en Odoo.</field>
+        </record>
+        <record model="openacademy.course" id="course1">
+            <field name="name">Curso de Vistas QWeb</field>
+            <field name="description">Aprende a crear informes y vistas web con QWeb.</field>
+        </record>
+        <record model="openacademy.course" id="course2">
+            <field name="name">Curso Avanzado de ORM</field>
+            <field name="description">Domina el ORM de Odoo, herencia, y métodos especiales.</field>
+        </record>
+    </data>
+</odoo>

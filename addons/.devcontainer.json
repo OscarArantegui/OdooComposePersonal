@@ -1,0 +1,15 @@
+{
+	"name" : "odoo-launch",
+	"dockerComposeFile": "../docker-compose.yml",
+	"workspaceFolder": "/mnt/my-module",
+	"service": "web",
+	"extensions": [
+		"mstuttgart.odoo-snippets", 
+		"ms-python.python", 
+		"ms-python.vscode-pylance", 
+		"redhat.vscode-xml", 
+		"scapigliato.vsc-odoo-development",
+		"jigar-patel.OdooSnippets"],
+	"forwardPorts": [8069],
+	"remoteUser": "root"
+}

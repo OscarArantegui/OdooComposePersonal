@@ -1,0 +1,37 @@
+<odoo>
+    <data noupdate="1">
+        
+        <record id="email_template_guardia" model="mail.template">
+            <field name="name">Notificación de Guardia Asignada</field>
+            <field name="model_id" ref="model_school_substitution"/>
+            <field name="subject">Tienes una nueva guardia: {{ object.date }} - {{ object.period_id.name }}</field>
+            <field name="email_from">aa22.laznar44@iespabloserrano.com</field>
+            <field name="email_to">{{ object.substitute_teacher_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola <strong><t t-out="object.substitute_teacher_id.name"/></strong>,
+                        <br/><br/>
+                        Se te ha asignado automáticamente una guardia para cubrir una ausencia.
+                        <br/><br/>
+                        <strong>Detalles:</strong>
+                        <ul>
+                            <li><strong>Fecha:</strong> <t t-out="object.date"/></li>
+                            <li><strong>Hora:</strong> <t t-out="object.period_id.name"/></li>
+                            <li><strong>Aula:</strong> <t t-out="object.classroom_id.name"/></li>
+                            <li><strong>Grupo:</strong> <t t-out="object.group_id.name"/></li>
+                            <li><strong>Profesor Ausente:</strong> <t t-out="object.replaced_teacher_id.name"/></li>
+                        </ul>
+                        <br/>
+                        Por favor, revisa tus tareas pendientes.
+                        <br/><br/>
+                        Saludos,
+                        <br/>
+                        <em>El Sistema de Guardias</em>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</odoo>

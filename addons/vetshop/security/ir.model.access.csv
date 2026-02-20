@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vetshop_species,vetshop.species,model_vetshop_species,base.group_user,1,1,1,1
+access_vetshop_owner,vetshop.owner,model_vetshop_owner,base.group_user,1,1,1,1
+access_vetshop_product,vetshop.product,model_vetshop_product,base.group_user,1,1,1,1
+access_vetshop_pet,vetshop.pet,model_vetshop_pet,base.group_user,1,1,1,1
+access_vetshop_sale_order,vetshop.sale_order,model_vetshop_sale_order,base.group_user,1,1,1,1
+access_vetshop_appointment,vetshop.appointment,model_vetshop_appointment,base.group_user,1,1,1,1
