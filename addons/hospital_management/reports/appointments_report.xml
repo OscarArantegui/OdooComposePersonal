@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record id="action_report_hospital_appointment" model="ir.actions.report">
+            <field name="name">Ticket de Cita</field>
+            <field name="model">hospital.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hospital_management.report_appointment_ticket_template</field>
+            <field name="report_file">hospital_management.report_appointment_ticket_template</field>
+            <field name="binding_model_id" ref="model_hospital_appointment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_appointment_ticket_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            
+                            <h2 class="text-center mt-4">Ticket de Cita Médica</h2>
+                            <h4 class="text-center text-muted mb-4">Ref: <span t-field="doc.name"/></h4>
+                            
+                            <div class="row mt-5">
+                                <div class="col-6">
+                                    <strong>Paciente:</strong>
+                                    <p t-field="doc.patient_id.name"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Fecha de la Cita:</strong>
+                                    <p t-field="doc.date"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <strong>Médico Asignado:</strong>
+                                    <p t-field="doc.doctor_id.name"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Especialidad:</strong>
+                                    <p t-field="doc.doctor_id.specialty"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

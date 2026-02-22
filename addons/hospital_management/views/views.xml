@@ -1,0 +1,110 @@
+<odoo>
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">hospital.appointment.form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirmar" invisible="state != 'draft'" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Observaciones">
+                            <field name="observations"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--Kanban view-->
+    <record id="view_hospital_appointment_kanban" model="ir.ui.view">
+        <field name="name">hospital.appointment.kanban</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+                <field name="state"/>
+                
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            
+                            <div class="o_kanban_record_top mb-2">
+                                <strong>
+                                    <i class="fa fa-user me-2"/> <field name="patient_id"/>
+                                </strong>
+                            </div>
+                            
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <span>Doctor: <field name="doctor_id"/></span>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-1">
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span><i class="fa fa-calendar"/> <field name="date"/></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!--Search filter-->
+    <record id="view_hospital_appointment_search" model="ir.ui.view">
+        <field name="name">hospital.appointment.search</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="name"/>
+
+                <filter string="Citas Pendientes" name="filtro_pendientes" domain="[('state', 'in', ['draft', 'confirmed'])]"/>
+
+                <filter string="Médico" name="group_by_doctor" context="{'group_by': 'doctor_id'}"/>
+                <filter string="Estado" name="group_by_state" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hospital_appointment_calendar" model="ir.ui.view">
+        <field name="name">hospital.appointment.calendar</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendario de Citas" date_start="date" color="doctor_id" mode="month">
+                <field name="patient_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">Citas Médicas</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">list,form,kanban,calendar</field>
+    </record>
+
+    <menuitem id="menu_hospital_root" name="Hospital"/>
+    <menuitem id="menu_hospital_appointments" name="Citas" parent="menu_hospital_root" action="action_hospital_appointment"/>
+
+</odoo>

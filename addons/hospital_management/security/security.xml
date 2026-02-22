@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="rule_hospital_appointment_visibility" model="ir.rule">
+            <field name="name">Ver solo citas en borrador o confirmadas</field>
+            <field name="model_id" ref="model_hospital_appointment"/>
+            <field name="domain_force">[('state', 'in', ['draft', 'confirmed'])]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+    </data>
+</odoo>
