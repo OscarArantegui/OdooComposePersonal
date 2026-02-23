@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_site_management_root"
+              name="Site Management"
+              sequence="50"/>
+
+    <menuitem id="menu_site_management_sites"
+              name="Sites"
+              parent="menu_site_management_root"
+              action="action_site"
+              sequence="10"/>
+
+    <menuitem id="menu_site_management_persons"
+              name="Persons"
+              parent="menu_site_management_root"
+              action="action_person"
+              sequence="20"/>
+
+</odoo>

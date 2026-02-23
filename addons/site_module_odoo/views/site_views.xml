@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_site_list" model="ir.ui.view">
+        <field name="name">site.management.site.list</field>
+        <field name="model">site.management.site</field>
+        <field name="arch" type="xml">
+            <list string="Sites">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="city"/>
+                <field name="country_id"/>
+                <field name="person_count"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_site_form" model="ir.ui.view">
+        <field name="name">site.management.site.form</field>
+        <field name="model">site.management.site</field>
+        <field name="arch" type="xml">
+            <form string="Site">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_person)d" type="action"
+                                class="oe_stat_button" icon="fa-users"
+                                context="{'default_site_id': id}">
+                            <field name="person_count" widget="statinfo" string="Persons"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="city"/>
+                            <field name="country_id"/>
+                        </group>
+                    </group>
+                    <group string="Address">
+                        <field name="address" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Persons">
+                            <field name="person_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_site" model="ir.actions.act_window">
+        <field name="name">Sites</field>
+        <field name="res_model">site.management.site</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
